@@ -1,0 +1,65 @@
+<!-- 1. Single Responsibility Principle (SRP)
+Принцип единственной ответственности: 
+Каждый класс должен иметь только одну причину для изменения. -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S</title>
+</head>
+<body>
+    <div class="content">
+        <h1>Пример Single Responsibility Principle</h1>
+        <button id="generateReport" class="generate_btn">Сгенерировать отчет</button>
+        <div id="report" class="report_contain"></div>
+    </div>
+
+    <script>
+        class Report {
+            constructor(content) {
+                this.content = content;
+            }
+    
+            generateReport() {
+                return `Отчет: ${this.content}`;
+            }
+        }
+    
+        document.getElementById("generateReport").addEventListener("click", () => {
+            const report = new Report("Искусственный интеллект (ИИ) стремительно развивается и находит применение в различных сферах, от медицины до финансов. Современные технологии позволяют ИИ анализировать огромные объемы данных, делать прогнозы и даже обучаться на основе предыдущего опыта. Это открывает новые горизонты для бизнеса, улучшая эффективность и снижая затраты. Однако с развитием ИИ возникают и этические вопросы, связанные с конфиденциальностью данных и возможностью замены человеческого труда. Важно находить баланс между инновациями и ответственным использованием технологий.");
+            document.getElementById("report").innerText = report.generateReport();
+        });
+    </script>
+    
+</body>
+</html>
+
+<style>
+.content{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    margin: 10px;
+    border: 2px solid rgb(54, 7, 95);
+    padding: 10px;
+}
+
+.generate_btn{
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(167, 142, 206);
+    height: 35px;
+    width: 30%;
+    margin: 10px;
+}
+
+.report_contain{
+    width: 80%;
+    margin: 10px;
+}
+</style>
+

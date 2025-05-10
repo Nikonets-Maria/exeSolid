@@ -1,0 +1,74 @@
+<!-- 5. Dependency Inversion Principle (DIP)
+Принцип инверсии зависимостей: 
+Модули верхнего уровня не должны зависеть от модулей нижнего уровня. 
+Оба должны зависеть от абстракций. -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D </title>
+</head>
+<body>
+    <div class="content">
+        <h1>Пример Dependency Inversion Principle </h1>
+        <button id="sendNotification" class="sent_btn">Отправить уведомление</button>
+        <div id="notificationResult" class="notification_content"></div>    
+    </div>
+
+    <script>
+        class NotificationService {
+            send(notification) {
+                throw new Error("Метод send() должен быть переопределен");
+            }
+        }
+
+        class EmailNotification extends NotificationService {
+            send(notification) {
+                return `Отправлено уведомление по электронной почте: ${notification}`;
+            }
+        }
+
+        class SMSNotification extends NotificationService {
+            send(notification) {
+                return `Отправлено SMS уведомление: ${notification}`;
+            }
+        }
+
+        // Легко сменить на SMSNotification
+        const notificationService = new EmailNotification();
+
+        document.getElementById("sendNotification").addEventListener("click", () => {
+            const result = notificationService.send("Вы получили новое сообщение! Спасибо за ваш труд <3");
+            document.getElementById("notificationResult").innerText = result;
+        });
+    </script>
+
+</body>
+</html>
+
+
+<style>
+    .content{
+        margin: 10px;
+        border: 2px solid rgb(95, 25, 7);
+        padding: 10px;
+    }
+    
+    .sent_btn{
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: rgb(206, 171, 142);
+        height: 35px;
+        width: 40%;
+        margin: 10px;
+    }
+    
+    .notification_content{
+        width: 80%;
+        margin: 10px;
+    }
+</style>
+

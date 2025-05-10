@@ -1,0 +1,81 @@
+<!-- 3. Liskov Substitution Principle (LSP)
+Принцип подстановки Лисков: 
+Объекты должны быть заменяемыми на экземпляры их подтипов 
+без изменения правильности программы. -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L </title>
+</head>
+<body>
+    <div class="content">
+        <h1>Пример Liskov Substitution Principle</h1>
+        <button id="letBirdFly" class="fly_btn">Может ли птица летать?</button>
+        <div id="flyResult" class="fly_contain"></div>
+
+    </div>
+
+    <script>
+        class Bird {
+            fly() {
+                return {
+                    message: "Конечно!",
+                    image: "images/sparrow.png"
+                };            
+            }
+        }
+
+        class Sparrow extends Bird { }
+
+        class Ostrich extends Bird {
+            fly() {
+                throw new Error("Но только не страус :( ");
+            }
+        }
+        
+        document.getElementById("letBirdFly").addEventListener("click", () => {
+            try {
+                let bird = new Sparrow(); // Попробуем с воробьем
+                const result = bird.fly();
+                document.getElementById("flyResult").innerHTML = `
+                    <div>${result.message}</div>
+                    <img src="${result.image}" class="bird_img" alt="Bird Image">
+                `;
+            } catch (error) {
+                document.getElementById("flyResult").innerText = error.message;
+            }
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    .content{
+        margin: 10px;
+        border: 2px solid rgb(7, 95, 95);
+        padding: 10px;
+    }
+    
+    .fly_btn{
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: rgb(142, 205, 206);
+        height: 35px;
+        width: 40%;
+        margin: 10px;
+    }
+    
+    .fly_contain{
+        width: 80%;
+        margin: 10px;
+    }
+
+    .bird_img{
+        width: 30%;
+    }
+
+    </style>

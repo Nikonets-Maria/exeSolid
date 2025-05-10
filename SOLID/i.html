@@ -1,0 +1,83 @@
+<!-- 4. Interface Segregation Principle (ISP)
+Принцип разделения интерфейсов: 
+Клиенты не должны зависеть от интерфейсов, 
+которые они не используют. -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I </title>
+</head>
+<body>
+    <div class="content">
+        <h1>Пример Interface Segregation Principle</h1>
+        <button id="printDocument" class="print_btn">Напечатать документ</button>
+        <button id="scanDocument" class="scan_btn">Сканировать документ</button>
+        <div id="output" class="output_contain"></div>
+    </div>
+
+</style>
+    
+<script>
+    class Printer {
+        print(document) {
+            return `Печатаю: ${document}`;
+        }
+    }
+
+    class Scanner {
+        scan() {
+            return "Сканирование завершено.";
+        }
+    }
+
+    const printer = new Printer();
+    const scanner = new Scanner();
+
+    document.getElementById("printDocument").addEventListener("click", () => {
+        const result = printer.print("Отчет о игре в крестики-нолики Дата игры: 15 октября 2023 года Участники: Игрок 1 (X) и Игрок 2 (O) Ход игры: Ход 1: Игрок 1 (X) ставит в центр (1, 1)     Ход 2: Игрок 2 (O) ставит O в верхний левый угол (0, 0) Ход 3: Игрок 1 (X) ставит в верхний правый угол (0, 2) Ход 4: Игрок 2 (O) ставит O в нижний левый угол (2, 0) Ход 5: Игрок 1 (X) ставит в нижний правый угол (2, 2) Ход 6: Игрок 2 (O) ставит O в центр нижнего ряда (2, 1) Результат игры: Победитель: Игрок 1 (X) Финальный счет: выигрывает с комбинацией (0, 2), (1, 1), (2, 2) Комментарии: Игра была напряженной, и оба игрока проявили хорошие навыки Игрок 1 (X) использовал стратегию контроля центра, что помогло ему одержать победу Игрок 2 (O) неплохо защищался, но не смог предотвратить выигрышную комбинацию");
+        document.getElementById("output").innerText = result;
+    });
+
+    document.getElementById("scanDocument").addEventListener("click", () => {
+        const result = scanner.scan();
+        document.getElementById("output").innerText = result;
+    });
+</script>
+</body>
+</html>
+
+<style>
+    .content{
+        margin: 10px;
+        border: 2px solid rgb(7, 95, 38);
+        padding: 10px;
+    }
+    
+    .print_btn{
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: rgb(142, 206, 183);
+        height: 35px;
+        width: 40%;
+        margin: 10px;
+    }
+
+    .scan_btn{
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: rgb(206, 142, 202);
+        height: 35px;
+        width: 40%;
+        margin: 10px;
+    }
+    
+    .output_contain{
+        width: 80%;
+        margin: 10px;
+    }
+

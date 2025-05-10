@@ -1,0 +1,92 @@
+<!-- 2. Open/Closed Principle (OCP)
+Принцип открытости/закрытости: 
+Классы должны быть открыты для расширения, 
+но закрыты для модификации. -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O </title>
+</head>
+<body>
+    <div class="content">
+        <h1>Пример Open/Closed Principle</h1>
+        <button id="calculateAreas" class="calculate_btn">Посчитать площадь рандомных фигур:</button>
+        <div id="areas" class="area_contain"></div>
+    </div>
+    <script>
+        class Shape {
+            area() {
+                throw new Error("Метод area() должен быть переопределен");
+            }
+        }
+    
+        class Rectangle extends Shape {
+            constructor(width, height) {
+                super();
+                this.width = width;
+                this.height = height;
+            }
+    
+            area() {
+                return this.width * this.height;
+            }
+        }
+    
+        class Circle extends Shape {
+            constructor(radius) {
+                super();
+                this.radius = radius;
+            }
+    
+            area() {
+                return Math.PI * this.radius * this.radius;
+            }
+        }
+    
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    
+        document.getElementById("calculateAreas").addEventListener("click", () => {
+            const shapes = [
+                new Rectangle(getRandomInt(1, 20), getRandomInt(1, 20)),
+                new Circle(getRandomInt(1, 10))
+            ];
+            const areas = shapes.map(shape => shape.area()).join(" и ");
+            document.getElementById("areas").innerText = `Площади прямоугольника и круга: ${areas}`;
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+<style>
+    .content{
+        margin: 10px;
+        border: 2px solid rgb(7, 11, 95);
+        padding: 10px;
+    }
+    
+    .calculate_btn{
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: rgb(144, 142, 206);
+        height: 35px;
+        width: 40%;
+        margin: 10px;
+    }
+    
+    .area_contain{
+        width: 80%;
+        margin: 10px;
+    }
+    </style>
+
+
+    
